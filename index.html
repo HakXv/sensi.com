@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد إعدادات الحساسية فري فاير 2026</title>
+    <style>
+        :root {
+            --primary: #ff5722;
+            --dark: #121214;
+            --card-bg: #1c1c1f;
+            --text: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 100%;
+            border-top: 5px solid var(--primary);
+        }
+        h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #252529;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+        select:focus {
+            border-color: var(--primary);
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #252529;
+            border-radius: 10px;
+            display: none;
+        }
+        .results h3 {
+            margin-top: 0;
+            color: #4caf50;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        .sensi-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #2d2d33;
+        }
+        .sensi-item:last-child {
+            border-bottom: none;
+        }
+        .sensi-name {
+            font-weight: 500;
+        }
+        .sensi-val {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .tip {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 15px;
+            text-align: center;
+            background: #121214;
+            padding: 8px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🎯 مستشار الحساسية التلقائي (2026)</h2>
+    
+    <div class="form-group">
+        <label for="device">نوع الهاتف الذكي:</label>
+        <select id="device">
+            <option value="android">أندرويد (Android)</option>
+            <option value="iphone">آيفون (iOS)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ram">حجم ذاكرة الوصول العشوائي (RAM):</label>
+        <select id="ram">
+            <option value="low">ضعيف (2GB - 3GB RAM)</option>
+            <option value="mid" selected>متوسط (4GB - 6GB RAM)</option>
+            <option value="high">قوي (8GB RAM فما فوق)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="style">أسلوب لعبك المفضل:</label>
+        <select id="style">
+            <option value="rush">مهاجم قاصف (Close-Range Rush)</option>
+            <option value="balanced">متوازن / هيدشوت ون تاب (One-Tap Pro)</option>
+            <option value="sniper">قناص محترف (Sniper Specialist)</option>
+        </select>
+    </div>
+
+    <button onclick="generateSensi()">احسب أفضل حساسية</button>
+
+    <div id="resultsBox" class="results">
+        <h3>🔥 الإعدادات المقترحة لك (الحد الأقصى 200)</h3>
+        <div class="sensi-item"><span class="sensi-name">عام (General)</span><span class="sensi-val" id="gen">--</span></div>
+        <div class="sensi-item"><span class="sensi-name">نقطة حمراء (Red Dot)</span><span class="sensi-val" id="red">--</span></div>
+        <div class="sensi-item"><span class="sensi-name">عدسة 2x</span><span class="sensi-val" id="x2">--</span></div>
+        <div class="sensi-item"><span class="sensi-name">عدسة 4x</span><span class="sensi-val" id="x4">--</span></div>
+        <div class="sensi-item"><span class="sensi-name">عدسة القناصة (AWM)</span><span class="sensi-val" id="awm">--</span></div>
+        <div class="sensi-item"><span class="sensi-name">النظرة الحرة (Free Look)</span><span class="sensi-val" id="look">--</span></div>
+        <div class="sensi-item"><span class="sensi-name">حجم زر إطلاق النار الموصى به</span><span class="sensi-val" id="btn">--</span></div>
+        
+        <div class="tip" id="tipText">نصيحة: ضع زر إطلاق النار في مكان منخفض لتعطي إصبعك مساحة للسحب (Drag) نحو الأعلى.</div>
+    </div>
+</div>
+
+<script>
+function generateSensi() {
+    const device = document.getElementById('device').value;
+    const ram = document.getElementById('ram').value;
+    const style = document.getElementById('style').value;
+
+    let gen, red, x2, x4, awm, look, btn;
+
+    // الحسابات الذكية بناءً على تحديثات فري فاير 2026 (السكيل الجديد حتى 200)
+    if (ram === 'low') {
+        gen = 192; red = 170; x2 = 165; x4 = 150; awm = 95; look = 160; btn = "45%";
+    } else if (ram === 'mid') {
+        if (style === 'rush') {
+            gen = 175; red = 160; x2 = 150; x4 = 140; awm = 70; look = 140; btn = "48%";
+        } else {
+            gen = 185; red = 175; x2 = 160; x4 = 145; awm = 80; look = 150; btn = "49%";
+        }
+    } else { // الأجهزة القوية ذات الاستجابة العالية والـ 120 هرتز
+        if (style === 'sniper') {
+            gen = 140; red = 120; x2 = 110; x4 = 100; awm = 52; look = 90; btn = "52%";
+        } else {
+            gen = 165; red = 150; x2 = 135; x4 = 120; awm = 65; look = 110; btn = "50%";
+        }
+    }
+
+    // تعديلات طفيفة مخصصة للايفون بسبب حساسية الشاشة العالية بطبيعتها
+    if (device === 'iphone') {
+        gen = Math.round(gen * 0.92);
+        red = Math.round(red * 0.95);
+    }
+
+    // عرض النتائج في الصفحة
+    document.getElementById('gen').innerText = gen;
+    document.getElementById('red').innerText = red;
+    document.getElementById('x2').innerText = x2;
+    document.getElementById('x4').innerText = x4;
+    document.getElementById('awm').innerText = awm;
+    document.getElementById('look').innerText = look;
+    document.getElementById('btn').innerText = btn;
+
+    document.getElementById('resultsBox').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
